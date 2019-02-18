@@ -154,9 +154,10 @@ public class ArticleDetailFragment extends Fragment implements
             }
         });
 
-       // toolbar = (CollapsingToolbarLayout) mRootView.findViewById(R.id.toolbar_layout);
-       // toolbar.setTitleEnabled(false);
-        //tool = (Toolbar) mRootView.findViewById(R.id.toolbar);
+        toolbar = (CollapsingToolbarLayout) mRootView.findViewById(R.id.toolbar_layout);
+     //   toolbar.setTitleEnabled(false);
+        toolbar.setExpandedTitleColor(getResources().getColor(R.color.white));
+        tool = (Toolbar) mRootView.findViewById(R.id.toolbar);
         bindViews();
         updateStatusBar();
         return mRootView;
@@ -207,7 +208,7 @@ public class ArticleDetailFragment extends Fragment implements
             return;
         }
 
-        TextView titleView = (TextView) mRootView.findViewById(R.id.article_title);
+      //  TextView titleView = (TextView) mRootView.findViewById(R.id.article_title);
         TextView bylineView = (TextView) mRootView.findViewById(R.id.article_byline);
         bylineView.setMovementMethod(new LinkMovementMethod());
         TextView bodyView = (TextView) mRootView.findViewById(R.id.article_body);
@@ -219,8 +220,9 @@ public class ArticleDetailFragment extends Fragment implements
             mRootView.setAlpha(0);
             mRootView.setVisibility(View.VISIBLE);
             mRootView.animate().alpha(1);
-            titleView.setText(mCursor.getString(ArticleLoader.Query.TITLE));
-      //      tool.setTitle(titleView.getText());
+     //       titleView.setText(mCursor.getString(ArticleLoader.Query.TITLE));
+         //   tool.setTitle(titleView.getText());
+            toolbar.setTitle(mCursor.getString(ArticleLoader.Query.TITLE));
             Date publishedDate = parsePublishedDate();
             if (!publishedDate.before(START_OF_EPOCH.getTime())) {
                 bylineView.setText(Html.fromHtml(
@@ -252,6 +254,8 @@ public class ArticleDetailFragment extends Fragment implements
                                 mPhotoView.setImageBitmap(imageContainer.getBitmap());
                                 mRootView.findViewById(R.id.meta_bar)
                                         .setBackgroundColor(mMutedColor);
+
+                              //  tool.setBackgroundColor(mMutedColor);
                                 updateStatusBar();
                             }
                         }
@@ -263,7 +267,7 @@ public class ArticleDetailFragment extends Fragment implements
                     });
         } else {
             mRootView.setVisibility(View.GONE);
-            titleView.setText("N/A");
+          //  titleView.setText("N/A");
             bylineView.setText("N/A" );
             bodyView.setText("N/A");
         }
